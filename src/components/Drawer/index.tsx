@@ -9,15 +9,22 @@ import ListItemIcon from '@mui/material/ListItemIcon'
 import ListItemText from '@mui/material/ListItemText'
 import InboxIcon from '@mui/icons-material/MoveToInbox'
 import MailIcon from '@mui/icons-material/Mail'
+import ArrowBackIcon from '@mui/icons-material/ArrowBack'
+import { useEffect } from 'react'
 
 const drawerWidth = 240
 
 export default function PermanentDrawer() {
+  const [open, setOpen] = React.useState(true)
+
+  useEffect(() => {
+    setOpen(open)
+  }, [])
   return (
     <Box sx={{ display: 'flex' }}>
       <Drawer
         sx={{
-          zIndex: -9999,
+          zIndex: -1,
           width: drawerWidth,
           flexShrink: 0,
           '& .MuiDrawer-paper': {
@@ -25,8 +32,9 @@ export default function PermanentDrawer() {
             boxSizing: 'border-box',
           },
         }}
-        variant='permanent'
+        variant='temporary'
         anchor='left'
+        open={open}
       >
         <Toolbar />
         <Toolbar />
@@ -50,6 +58,17 @@ export default function PermanentDrawer() {
               </ListItemButton>
             </ListItem>
           ))}
+        </List>
+        <List sx={{ bottom: 0, position: 'fixed', width: drawerWidth }}>
+          <ListItem disablePadding>
+            <ListItemButton onClick={() => setOpen(false)}>
+              <ListItemText primary={'Hide'} />
+              <ListItemIcon>
+                {' '}
+                <ArrowBackIcon />
+              </ListItemIcon>
+            </ListItemButton>
+          </ListItem>
         </List>
       </Drawer>
     </Box>
