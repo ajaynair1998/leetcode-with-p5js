@@ -12,14 +12,26 @@ import MailIcon from '@mui/icons-material/Mail'
 import ArrowBackIcon from '@mui/icons-material/ArrowBack'
 import { useEffect } from 'react'
 
+interface IProps {
+  open: boolean
+  handleClose: () => void
+  items: IItem[]
+}
+
+interface IItem {
+  value: string
+  label: string
+}
+
 const drawerWidth = 240
 
-export default function PermanentDrawer() {
+export default function PermanentDrawer(props: IProps) {
   const [open, setOpen] = React.useState(true)
 
   useEffect(() => {
-    setOpen(open)
-  }, [])
+    console.log(props.open)
+    setOpen(props.open)
+  }, [props])
   return (
     <Box sx={{ display: 'flex' }}>
       <Drawer
@@ -40,28 +52,27 @@ export default function PermanentDrawer() {
         <Toolbar />
 
         <List>
-          {['Inbox', 'Starred', 'Send email', 'Drafts'].map((text, index) => (
-            <ListItem key={text} disablePadding>
+          {props.items.map(({ label, value }, index) => (
+            <ListItem key={value} disablePadding>
               <ListItemButton>
                 <ListItemIcon>{index % 2 === 0 ? <InboxIcon /> : <MailIcon />}</ListItemIcon>
-                <ListItemText primary={text} />
+                <ListItemText primary={label} />
               </ListItemButton>
             </ListItem>
           ))}
         </List>
-        <List>
-          {['All mail', 'Trash', 'Spam'].map((text, index) => (
-            <ListItem key={text} disablePadding>
-              <ListItemButton>
-                <ListItemIcon>{index % 2 === 0 ? <InboxIcon /> : <MailIcon />}</ListItemIcon>
-                <ListItemText primary={text} />
-              </ListItemButton>
-            </ListItem>
-          ))}
-        </List>
-        <List sx={{ bottom: 0, position: 'fixed', width: drawerWidth }}>
+
+        <List
+          sx={{
+            bottom: 0,
+            position: 'fixed',
+            width: drawerWidth,
+            opacity: 1,
+            backgroundColor: 'white',
+          }}
+        >
           <ListItem disablePadding>
-            <ListItemButton onClick={() => setOpen(false)}>
+            <ListItemButton onClick={() => props.handleClose()}>
               <ListItemText primary={'Hide'} />
               <ListItemIcon>
                 {' '}

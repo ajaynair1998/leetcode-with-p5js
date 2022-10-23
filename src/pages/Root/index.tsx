@@ -1,27 +1,13 @@
 import React from 'react'
+import { Box } from '@mui/material'
 import { Outlet } from 'react-router-dom'
 import Navbar from '../../components/Navbar'
-import ColorTabs from '../../components/Tabs'
 
 export default function Root() {
   return (
-    <React.Fragment>
+    <Box>
       <Navbar />
-      <ColorTabs items={TABITEMS} />
       <Outlet />
-    </React.Fragment>
+    </Box>
   )
 }
-
-const TABITEMS = [
-  {
-    value: 'array',
-    label: 'Array',
-    action: () => console.log('pressed array'),
-  },
-  {
-    value: 'stack',
-    label: 'Stack',
-    action: () => console.log('pressed stack'),
-  },
-]

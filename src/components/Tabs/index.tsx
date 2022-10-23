@@ -5,6 +5,7 @@ import { AppBar, styled } from '@mui/material'
 
 interface IProps {
   items: item[]
+  handleClickTab: (value: string) => void
 }
 interface item {
   value: string
@@ -43,6 +44,7 @@ export default function ColorTabs(props: IProps) {
 
   const handleChange = (event: React.SyntheticEvent, newValue: string) => {
     setValue(newValue)
+    props.handleClickTab(newValue)
   }
 
   return (

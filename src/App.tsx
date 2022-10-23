@@ -3,6 +3,9 @@ import React, { ReactElement } from 'react'
 import { createBrowserRouter, RouterProvider } from 'react-router-dom'
 import ErrorPage from './pages/Error'
 import Root from './pages/Root'
+import { Provider } from 'react-redux'
+import store from './configs/Redux'
+import Array from './pages/Array'
 
 const router = createBrowserRouter([
   {
@@ -13,6 +16,12 @@ const router = createBrowserRouter([
       {
         path: 'home/',
         element: <Home />,
+        children: [
+          {
+            path: 'array/',
+            element: <Array />,
+          },
+        ],
       },
     ],
   },
@@ -21,7 +30,9 @@ const router = createBrowserRouter([
 function App(): ReactElement {
   return (
     <React.Fragment>
-      <RouterProvider router={router} />
+      <Provider store={store}>
+        <RouterProvider router={router} />
+      </Provider>
     </React.Fragment>
   )
 }
