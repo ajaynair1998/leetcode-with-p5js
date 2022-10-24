@@ -3,9 +3,8 @@ import React, { ReactElement } from 'react'
 import { createBrowserRouter, RouterProvider } from 'react-router-dom'
 import ErrorPage from './pages/Error'
 import Root from './pages/Root'
-import { Provider } from 'react-redux'
-import store from './configs/Redux'
 import Array from './pages/Array'
+import BinarySearch from './pages/Array/BinarySearch'
 
 const router = createBrowserRouter([
   {
@@ -20,6 +19,7 @@ const router = createBrowserRouter([
           {
             path: 'array/',
             element: <Array />,
+            children: [{ path: 'binarysearch/', element: <BinarySearch /> }],
           },
         ],
       },
@@ -30,9 +30,7 @@ const router = createBrowserRouter([
 function App(): ReactElement {
   return (
     <React.Fragment>
-      <Provider store={store}>
-        <RouterProvider router={router} />
-      </Provider>
+      <RouterProvider router={router} />
     </React.Fragment>
   )
 }

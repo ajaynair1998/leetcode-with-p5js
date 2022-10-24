@@ -4,6 +4,7 @@ import PermanentDrawer from '../../components/Drawer'
 import { useDispatch, useSelector } from 'react-redux'
 import { IStore } from '../../helpers'
 import { setDrawerState } from '../../configs/Redux/Reducers/appStateReducer'
+import { Outlet } from 'react-router-dom'
 
 const Array = () => {
   const dispatch = useDispatch()
@@ -13,8 +14,9 @@ const Array = () => {
     dispatch(setDrawerState(false))
   }
   return (
-    <Container maxWidth={'xl'}>
+    <Container maxWidth={'xl'} id='section-container'>
       <PermanentDrawer open={isDrawerOpen} handleClose={handleCloseDrawer} items={ITEMS} />
+      <Outlet />
     </Container>
   )
 }
